@@ -1,0 +1,8 @@
+# Ignore the venv folder
+venv/
+
+# Ignore package-related files
+go.mod
+go.sum
+package-lock.json
+yarn.lock
